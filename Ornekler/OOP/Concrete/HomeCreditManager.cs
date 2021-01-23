@@ -1,18 +1,13 @@
 ﻿using OOP1.Abstract;
 using System;
-using System.Collections.Generic;
 
 namespace OOP1.Concrete
 {
     class HomeCreditManager : ICreditManager
     {
-        public void Calculate(ICustomer customer, List<ILoggerService> loggerServices)
+        public void Calculate(ICustomer customer)
         {
-            Console.WriteLine("Home Credit Calculated for : " + customer.CustomerNumber + "( " + customer.Job + " )");
-            foreach (var loggerService in loggerServices)
-            {
-                loggerService.Log();
-            }
+            Console.WriteLine("Home Credit Calculated! -> " + customer.Job);
         }
     }
 }

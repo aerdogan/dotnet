@@ -6,15 +6,9 @@ namespace OOP1.Concrete
 {
     class CarCreditManager : ICreditManager
     {
-
-        public void Calculate(ICustomer customer, List<ILoggerService> loggerServices)
+        public void Calculate(ICustomer customer)
         {
-            Console.WriteLine("Car Credit Calculated for : " + customer.CustomerNumber + "( " + customer.Job + " )");
-            foreach (var loggerService in loggerServices)
-            {
-                loggerService.Log();
-            }
-            
+            Console.WriteLine("Car Credit Calculated! -> " + customer.Job );
         }
     }
 }

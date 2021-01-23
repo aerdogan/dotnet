@@ -32,11 +32,13 @@ namespace OOP1
             ICreditManager carcreditManager = new CarCreditManager();
             ICreditManager homecreditManager = new HomeCreditManager();
 
-            carcreditManager.Calculate(customer1, loggers);
-            carcreditManager.Calculate(customer2, loggers);
 
-            homecreditManager.Calculate(customer1, loggers);
-            homecreditManager.Calculate(customer2, loggers);
+            IAccountManager accountManager1 = new AccountManager();
+            accountManager1.DoAccount(carcreditManager, customer1, loggers);
+
+            IAccountManager accountManager2 = new AccountManager();
+            accountManager2.DoAccount(homecreditManager, customer2, loggers);
+
         }
     }
 }
