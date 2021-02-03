@@ -1,10 +1,7 @@
 ﻿using Business.Abstract;
 using DataAccess.Abstract;
-using DataAccess.Concrete.InMemory;
 using Entities.Concrete;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Business.Concrete
 {
@@ -19,10 +16,17 @@ namespace Business.Concrete
 
         public List<Product> GetAll()
         {
-            //İş kodları
-            //Yetkisi var mı?
-
             return _productDal.GetAll();
+        }
+
+        public List<Product> GetAllByCategoryId(int Id)
+        {
+            return _productDal.GetAll(p => p.CategoryId == Id);
+        }
+
+        public List<Product> GetAllByUnitPrice(decimal min, decimal max)
+        {
+            return _productDal.GetAll(p => p.UnitPrice >= min && p.UnitPrice <= max);
         }
     }
 }
