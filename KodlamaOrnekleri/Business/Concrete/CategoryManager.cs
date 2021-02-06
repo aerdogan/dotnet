@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Business.Concrete
 {
-    class CategoryManager : ICategoryService
+    public class CategoryManager : ICategoryService
     {
         ICategoryDal _categoryDal;
         public CategoryManager(ICategoryDal categoryDal)
