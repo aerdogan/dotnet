@@ -14,6 +14,7 @@ namespace ConsoleUI
             {
                 Console.WriteLine(product.ProductName);
             }
+            Console.ReadLine();
         }
 
 }

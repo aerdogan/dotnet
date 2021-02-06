@@ -1,6 +1,7 @@
-﻿namespace Entities.Abstract
+﻿namespace Core.Entities
 {
     public interface IEntity
     {
+
     }
 }

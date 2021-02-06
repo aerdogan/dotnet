@@ -1,9 +1,9 @@
-﻿using Entities.Abstract;
+﻿using Core.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace DataAccess.Abstract
+namespace Core.DataAccess
 {
     // T "sadece" IEntity tipinde ve sadece new'lenebilir nesne alabilsin!
     public interface IEntityRepository<T> where T:class, IEntity, new()
