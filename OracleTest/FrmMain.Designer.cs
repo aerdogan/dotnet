@@ -29,23 +29,23 @@ namespace OracleTest
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dataViewer = new System.Windows.Forms.DataGridView();
             this.btnListele = new System.Windows.Forms.Button();
             this.btnEkle = new System.Windows.Forms.Button();
             this.btnDuzelt = new System.Windows.Forms.Button();
             this.btnSil = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataViewer)).BeginInit();
             this.SuspendLayout();
             // 
-            // dataGridView1
+            // dataViewer
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 67);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(623, 275);
-            this.dataGridView1.TabIndex = 0;
+            this.dataViewer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataViewer.Location = new System.Drawing.Point(12, 67);
+            this.dataViewer.Name = "dataViewer";
+            this.dataViewer.RowHeadersWidth = 51;
+            this.dataViewer.RowTemplate.Height = 24;
+            this.dataViewer.Size = new System.Drawing.Size(623, 275);
+            this.dataViewer.TabIndex = 0;
             // 
             // btnListele
             // 
@@ -96,17 +96,17 @@ namespace OracleTest
             this.Controls.Add(this.btnDuzelt);
             this.Controls.Add(this.btnEkle);
             this.Controls.Add(this.btnListele);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dataViewer);
             this.Name = "FrmMain";
             this.Text = "Entity Fw - Oracle Test";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataViewer)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dataViewer;
         private System.Windows.Forms.Button btnListele;
         private System.Windows.Forms.Button btnEkle;
         private System.Windows.Forms.Button btnDuzelt;

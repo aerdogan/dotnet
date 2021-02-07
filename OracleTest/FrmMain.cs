@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OracleTest.Entity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
@@ -29,7 +30,7 @@ namespace OracleTest
         {
             var query = from t in db.Kisi select t;
             IEnumerable<KISILER> liste = query.ToList();
-            dataGridView1.DataSource = liste;
+            dataViewer.DataSource = liste;
         }
 
         private void btnDuzelt_Click(object sender, EventArgs e)
