@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace OracleTest
+namespace OracleTest.Entity
 {
     public class KISILER
     {

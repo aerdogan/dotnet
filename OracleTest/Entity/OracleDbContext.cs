@@ -1,7 +1,7 @@
 ﻿using System.Data.Entity;
 using System.Reflection;
 
-namespace OracleTest
+namespace OracleTest.Entity
 {
     public class OracleDbContext : DbContext
     {

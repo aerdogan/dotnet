@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 
-namespace OracleTest
+namespace OracleTest.Entity
 {
     class KISILER_Map : EntityTypeConfiguration<KISILER>
     {
