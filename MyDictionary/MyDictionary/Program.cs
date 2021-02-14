@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Ornekler
+namespace MyDictionary
 {
     class Program
     {

@@ -1,9 +1,9 @@
-﻿namespace Ornekler
+﻿namespace MyDictionary
 {
     public class MyList<T>
     {
         T[] items;
-        //constructor
+
         public MyList()
         {
             items = new T[0];
