@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Business.Constants;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
@@ -14,21 +16,41 @@ namespace Business.Concrete
             _carDal = carDal;
         }
 
-        public void Add(Car car)
+        public IResult Add(Car car)
         {
+            if (car.Name.Length < 3)
+            {                
+                return new ErrorResult(Messages.CarNameInvalid);
+            }
+
+            if (car.DailyPrice <= 0)
+            {
+                return new ErrorResult(Messages.CarDailyPriceInvalid);
+            }
+
             _carDal.Add(car);
-            Console.WriteLine("Yeni Araç Eklendi : " + car.Description );
+            return new SuccessResult(Messages.CarAdded);
         }
-        public void Update(Car car)
+        public IResult Update(Car car)
         {
+            if (car.Name.Length < 3)
+            {
+                return new ErrorResult(Messages.CarNameInvalid);
+            }
+
+            if (car.DailyPrice <= 0)
+            {
+                return new ErrorResult(Messages.CarDailyPriceInvalid);
+            }
+
             _carDal.Update(car);
-            Console.WriteLine( car.Id + " Numaralı Araç Güncellendi : " + car.Description);
+            return new SuccessResult(Messages.CarUpdated);
         }
 
-        public void Delete(Car car)
+        public IResult Delete(Car car)
         {
             _carDal.Delete(car);
-            Console.WriteLine("Araç Silindi : " + car.Description);
+            return new SuccessResult(Messages.CarDeleted);
         }
 
         public List<Car> GetAll()
@@ -39,7 +61,17 @@ namespace Business.Concrete
 
         public Car GetById(int id)
         {
-            return _carDal.GetById(id);
+            return _carDal.Get( c => c.Id == id);
+        }
+
+        public List<Car> GetCarsByBrandId(int brandId)
+        {
+            return _carDal.GetCarsByBrandId(brandId);
+        }
+
+        public List<Car> GetCarsByColorId(int colorId)
+        {
+            return _carDal.GetCarsByColorId(colorId);
         }
 
     }

@@ -1,5 +1,5 @@
 ﻿using Business.Concrete;
-using DataAccess.Concrete.InMemory;
+using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
 using System;
 
@@ -9,16 +9,10 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            CarManager carManager = new CarManager(new InMemoryCarDal());
-
-            foreach (Car car in carManager.GetAll())
-            {
-                Console.WriteLine("Araç No: " + car.Id+ " Günlük Fiyat: " + car.DailyPrice +
-                 " Model: " + car.ModelYear + " Açıklama: " + car.Description );
-            }
-
+            CarManager carManager = new CarManager(new EfCarDal());
+          
             Car newCar = new Car();
-            newCar.Id = 5;
+            newCar.Name = "Ford";
             newCar.BrandId = 1;
             newCar.ColorId = 3;
             newCar.ModelYear = 2007;
@@ -26,22 +20,13 @@ namespace ConsoleUI
             newCar.Description = "2007 model Beyaz Ford";
             carManager.Add(newCar);
 
-            Car car5 = carManager.GetById(5);
-            Console.WriteLine("Araç No: " + car5.Id + " Günlük Fiyat: " + car5.DailyPrice +
-                 " Model: " + car5.ModelYear + " Açıklama: " + car5.Description);
-
-            car5.DailyPrice = 270;
-            carManager.Update(car5);
-            Console.WriteLine("Araç No: " + car5.Id + " Günlük Fiyat: " + car5.DailyPrice +
-                 " Model: " + car5.ModelYear + " Açıklama: " + car5.Description);
-
-            carManager.Delete(car5);
+            Car car1 = carManager.GetById(1);
+            Console.WriteLine("Araç No: " + car1.Id + " Günlük Fiyat: " + car1.DailyPrice +
+                 " Model: " + car1.ModelYear + " Açıklama: " + car1.Description);
             
-            foreach (Car car in carManager.GetAll())
-            {
-                Console.WriteLine("Araç No: " + car.Id + " Günlük Fiyat: " + car.DailyPrice +
-                 " Model: " + car.ModelYear + " Açıklama: " + car.Description);
-            }
+
+
+
 
         }
     }

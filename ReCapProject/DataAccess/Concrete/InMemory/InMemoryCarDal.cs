@@ -5,8 +5,9 @@ using System.Linq;
 
 namespace DataAccess.Concrete.InMemory
 {
-    public class InMemoryCarDal : ICarDal
+    public class InMemoryCarDal /* : ICarDal */
     {
+        /*
         List<Car> _cars;
         public InMemoryCarDal()
         {
@@ -46,6 +47,7 @@ namespace DataAccess.Concrete.InMemory
         {
             return _cars.SingleOrDefault(c => c.Id == id);
         }
+        */
 
     }
 }
