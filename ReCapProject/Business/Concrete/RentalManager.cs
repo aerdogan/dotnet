@@ -4,6 +4,7 @@ using Core.Utilities.Results;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
+using System;
 using System.Linq;
 
 namespace Business.Concrete
@@ -49,5 +50,17 @@ namespace Business.Concrete
                 return (result.Count() == 1) ? false : true;
             }
         }
+
+        public IResult CarIsReturned(int carId)
+        {
+            using (NorthwindContext context = new NorthwindContext())
+            {
+                Rental rental = _rentalDal.Get(r => r.CarId == carId && r.ReturnDate == null);
+                rental.ReturnDate = DateTime.Now;
+                _rentalDal.Update(rental);
+            }
+            return new SuccessResult(Messages.RentalUpdated);;
+        }
+
     }
 }

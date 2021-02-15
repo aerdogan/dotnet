@@ -22,6 +22,11 @@ namespace ConsoleUI
             RentACar(user, car, customer);
             RentACar(user, car, customer); // aynı aracı ikinci kez kiralamaya çalışıyoruz... error dönüyor
 
+            RentalManager rentalManager = new RentalManager(new EfRentalDal());
+            rentalManager.CarIsReturned(car.Id); // araç iade ediliyor
+
+            RentACar(user, car, customer); // tekrar kiralandı.
+
         }
 
         private static void RentACar(User user, Car car, Customer customer)
