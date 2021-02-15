@@ -20,16 +20,16 @@ namespace Business.Concrete
             return new SuccessResult(Messages.BrandAdded);
         }
 
-        public IResult Delete(Brand brand)
-        {
-            _brandDal.Delete(brand);
-            return new SuccessResult(Messages.BrandDeleted);
-        }
-
         public IResult Update(Brand brand)
         {
             _brandDal.Update(brand);
             return new SuccessResult(Messages.BrandUpdated);
+        }
+
+        public IResult Delete(Brand brand)
+        {
+            _brandDal.Delete(brand);
+            return new SuccessResult(Messages.BrandDeleted);
         }
     }
 }
