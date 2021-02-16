@@ -103,11 +103,19 @@ namespace ConsoleUI
         private static void ListCars()
         {
             CarManager carManager = new CarManager(new EfCarDal());
-            List<CarDetailDto> liste = carManager.GetCarDetails();
-            foreach (var car in liste)
+            var result = carManager.GetCarDetails();
+            if (result.Success)
             {
-                Console.WriteLine("Araç: " + car.CarName + " Marka: " + car.BrandName + " Color: " + car.ColorName + " Fiyat: " + car.DailyPrice);
+                foreach (var car in result.Data)
+                {
+                    Console.WriteLine("Araç: " + car.CarName + " Marka: " + car.BrandName + " Color: " + car.ColorName + " Fiyat: " + car.DailyPrice);
+                }
             }
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
+
         }
     }
 }
