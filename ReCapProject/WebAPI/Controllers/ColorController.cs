@@ -37,9 +37,11 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpPost("add")]
-        public IActionResult Add(Color color)
+        [HttpGet("add")]
+        public IActionResult Add(string colorName)
         {
+            Color color = new Color();
+            color.Name = colorName;
             var result = _colorService.Add(color);
             if (result.Success)
             {
