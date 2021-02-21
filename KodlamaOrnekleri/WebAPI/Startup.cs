@@ -23,9 +23,15 @@ namespace WebAPI
             /* asp.net kendi içinde IoC container barýndýrýyor 
              * ancak biz bu örnekte core için þu an için en baþarýlý olan autofac dahil edeceðiz
              * ioc seçenekler : Autofac, Ninject, CastleWindsor, StructureMap, LightInject, DryInject
-            */ 
+            */
             //services.AddSingleton<IProductService, ProductManager>();
             //services.AddSingleton<IProductDal, EfProductDal>();
+            
+            // Register Swagger  
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Sample API", Version = "version 1" });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -34,6 +40,13 @@ namespace WebAPI
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+
+                app.UseSwagger();
+                app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                });
+
             }
 
             app.UseHttpsRedirection();
