@@ -30,7 +30,7 @@ namespace WebAPI
             // Register Swagger  
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Sample API", Version = "version 1" });
+                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Sample API", Version = "v1" });
             });
         }
 
@@ -46,7 +46,6 @@ namespace WebAPI
                 {
                     c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
                 });
-
             }
 
             app.UseHttpsRedirection();
