@@ -8,27 +8,30 @@ using Entities.Concrete;
 using Entities.DTOs;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Business.Concrete
 {
     public class ProductManager : IProductService
     {
         IProductDal _productDal;
+        ICategoryDal _categoryDal;
 
-        public ProductManager(IProductDal productDal)
+        public ProductManager(IProductDal productDal, ICategoryDal categoryDal)
         {
             _productDal = productDal;
+            _categoryDal = categoryDal;
         }
 
         [ValidationAspect(typeof(ProductValidator))]
         public IResult Add(Product product)
         {
-            if (CheckIfProductCountOfCategoryCorrect(product.CategoryId).Success)
-            {
-                _productDal.Add(product);
-                return new SuccessResult(Messages.ProductAdded);
-            }
-            return new ErrorResult();
+            if (!CheckIfProductCountOfCategoryCorrect(product.CategoryId).Success) return new ErrorResult();
+            if (!CheckIfProductNameIfExist(product.ProductName).Success) return new ErrorResult();
+            if (!CheckIfCategoryCountExceeded().Success) return new ErrorResult();
+
+            _productDal.Add(product);
+            return new SuccessResult(Messages.ProductAdded);            
         }
 
         public IDataResult<List<Product>> GetAll()
@@ -80,14 +83,22 @@ namespace Business.Concrete
 
         private IResult CheckIfProductNameIfExist(string productName)
         {
-            var result = _productDal.GetAll(p => p.ProductName == productName).Count;
-            if (result > 0)
+            var result = _productDal.GetAll(p => p.ProductName == productName).Any();
+            if (result)
             {
                 return new ErrorResult(Messages.ProductIsExist);
             }
             return new SuccessResult();
-
         }
 
+        private IResult CheckIfCategoryCountExceeded()
+        {
+            var result = _categoryDal.GetAll().Count;
+            if (result == 15 )
+            {
+                return new ErrorResult(Messages.CategoryCountExceeded);
+            }
+            return new SuccessResult();
+        }
     }
 }
