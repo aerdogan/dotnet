@@ -2,6 +2,7 @@
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
+using Core.Utilities.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -26,9 +27,13 @@ namespace Business.Concrete
         [ValidationAspect(typeof(ProductValidator))]
         public IResult Add(Product product)
         {
-            if (!CheckIfProductCountOfCategoryCorrect(product.CategoryId).Success) return new ErrorResult();
-            if (!CheckIfProductNameIfExist(product.ProductName).Success) return new ErrorResult();
-            if (!CheckIfCategoryCountExceeded().Success) return new ErrorResult();
+            IResult result = BusinessRules.Run(
+                CheckIfProductNameExists(product.ProductName),
+                CheckIfProductCountOfCategoryCorrect(product.CategoryId), 
+                CheckIfCategoryLimitExceded()
+            );
+
+            if (result != null) return result;
 
             _productDal.Add(product);
             return new SuccessResult(Messages.ProductAdded);            
@@ -81,7 +86,7 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
-        private IResult CheckIfProductNameIfExist(string productName)
+        private IResult CheckIfProductNameExists(string productName)
         {
             var result = _productDal.GetAll(p => p.ProductName == productName).Any();
             if (result)
@@ -91,14 +96,16 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
-        private IResult CheckIfCategoryCountExceeded()
+        private IResult CheckIfCategoryLimitExceded()
         {
-            var result = _categoryService.GetAll().Data.Count;
-            if (result > 15 )
+            var result = _categoryService.GetAll();
+            if (result.Data.Count > 15)
             {
-                return new ErrorResult(Messages.CategoryCountExceeded);
+                return new ErrorResult(Messages.CategoryLimitExceeded);
             }
+
             return new SuccessResult();
         }
+
     }
 }
