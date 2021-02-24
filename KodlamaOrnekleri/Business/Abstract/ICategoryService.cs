@@ -6,10 +6,10 @@ namespace Business.Abstract
 {
     public interface ICategoryService
     {
-        List<Category> GetAll();
+        IDataResult<List<Category>> GetAll();
         
         IResult Add(Category category);
 
-        Category GetById(int categoryId);
+        IDataResult<Category> GetById(int categoryId);
     }
 }

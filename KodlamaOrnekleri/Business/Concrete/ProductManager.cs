@@ -15,12 +15,12 @@ namespace Business.Concrete
     public class ProductManager : IProductService
     {
         IProductDal _productDal;
-        ICategoryDal _categoryDal;
+        ICategoryService _categoryService;
 
-        public ProductManager(IProductDal productDal, ICategoryDal categoryDal)
+        public ProductManager(IProductDal productDal, ICategoryService categoryService)
         {
             _productDal = productDal;
-            _categoryDal = categoryDal;
+            _categoryService = categoryService;
         }
 
         [ValidationAspect(typeof(ProductValidator))]
@@ -93,8 +93,8 @@ namespace Business.Concrete
 
         private IResult CheckIfCategoryCountExceeded()
         {
-            var result = _categoryDal.GetAll().Count;
-            if (result == 15 )
+            var result = _categoryService.GetAll().Data.Count;
+            if (result > 15 )
             {
                 return new ErrorResult(Messages.CategoryCountExceeded);
             }
