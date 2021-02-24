@@ -2,7 +2,6 @@
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
-using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -24,14 +23,10 @@ namespace Business.Concrete
         [ValidationAspect(typeof(ProductValidator))]
         public IResult Add(Product product)
         {
-            //if (product.ProductName.Length < 2)
-            //{
-            //    return new ErrorResult(Messages.ProductNameInvalid);
-            //}
-            //ValidationTool.Validate(new ProductValidator(), product);
 
             _productDal.Add(product);
             return new SuccessResult(Messages.ProductAdded);
+            
         }
 
         public IDataResult<List<Product>> GetAll()
