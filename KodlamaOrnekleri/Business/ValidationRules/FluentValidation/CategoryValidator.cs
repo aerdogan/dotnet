@@ -1,8 +1,5 @@
 ﻿using Entities.Concrete;
 using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Business.ValidationRules.FluentValidation
 {
@@ -10,7 +7,7 @@ namespace Business.ValidationRules.FluentValidation
     {
         public CategoryValidator()
         {
-            RuleFor(c => c.CategoryId).GreaterThanOrEqualTo(10).WithMessage("En fazla 10 kategor girilebilir");
+            RuleFor(c => c.CategoryName).NotEmpty();
         }
 
     }
