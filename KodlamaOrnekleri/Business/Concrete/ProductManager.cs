@@ -103,7 +103,6 @@ namespace Business.Concrete
             {
                 return new ErrorResult(Messages.CategoryLimitExceeded);
             }
-
             return new SuccessResult();
         }
 
