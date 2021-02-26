@@ -62,7 +62,7 @@ namespace Business.Concrete
             return new ErrorResult(Messages.CarImageCountExceeded);
         }
 
-        public IDataResult<List<CarImage>> GetCarImagesByCarId(int carId)
+        public IDataResult<List<CarImage>> GetImagesByCarId(int carId)
         {
             var result = _carImageDal.GetAll(ci => ci.CarId == carId);
             if (!result.Any())
