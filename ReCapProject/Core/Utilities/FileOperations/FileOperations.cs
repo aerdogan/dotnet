@@ -21,12 +21,6 @@ namespace Core.Utilities.FileOperations
             return false;
         }
 
-        public static bool CheckImageFile(IFormFile file)
-        {
-            var extension = Path.GetExtension(file.FileName);
-            return (extension == ".jpg" || extension == ".jpeg" || extension == ".png");
-        }
-
         public static bool DeleteImageFile(string filePath, string fileName)
         {
             string fullPath = Path.Combine(filePath, fileName);

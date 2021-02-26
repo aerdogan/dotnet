@@ -25,10 +25,6 @@ namespace WebAPI.Controllers
         [HttpPost("addcarimage")]
         public IActionResult AddCarImage([FromForm] IFormFile imageFile, [FromForm] CarImage carImage)
         {
-            if (!FileOperations.CheckImageFile(imageFile))
-            {
-                return BadRequest(new { Message = Messages.InvalidImageFileFormat });
-            }
             carImage.ImagePath = Guid.NewGuid() + Path.GetExtension(imageFile.FileName);
             var result = _carImageService.AddCarImage(carImage);            
             if (result.Success) {                
@@ -41,10 +37,6 @@ namespace WebAPI.Controllers
         [HttpPost("updatecarimage")]
         public IActionResult UpdateCarImage([FromForm] IFormFile imageFile, [FromForm] CarImage carImage)
         {            
-            if (!FileOperations.CheckImageFile(imageFile))
-            {
-                return BadRequest(new { Message = Messages.InvalidImageFileFormat });
-            }
             carImage.ImagePath = Guid.NewGuid() + Path.GetExtension(imageFile.FileName);
             var result = _carImageService.UpdateCarImage(carImage);
             if (result.Success)
