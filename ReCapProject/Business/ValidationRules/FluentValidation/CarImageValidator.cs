@@ -7,7 +7,7 @@ namespace Business.ValidationRules.FluentValidation
     {
         public CarImageValidator()
         {
-            RuleFor(ci => ci.ImagePath).Must(x => x.Equals("image/jpeg") || x.Equals("image/jpg") || x.Equals("image/png"))
+            RuleFor(ci => ci.ImagePath).Must(x => x.EndsWith(".jpeg") || x.EndsWith(".jpg") || x.EndsWith(".png"))
                 .WithMessage("Resim dosya türü desteklenmiyor!");
         }
 

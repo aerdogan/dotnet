@@ -36,15 +36,21 @@ namespace WebAPI.Controllers
 
         [HttpPost("updatecarimage")]
         public IActionResult UpdateCarImage([FromForm] IFormFile imageFile, [FromForm] CarImage carImage)
-        {            
+        {
+            var deleted = _carImageService.GetById(carImage.Id);
+            if (deleted.Success)
+            {
+                FileOperations.DeleteImageFile(_configuration.GetSection("ImageRootPath").Value, deleted.Data.ImagePath);
+            }
+
             carImage.ImagePath = Guid.NewGuid() + Path.GetExtension(imageFile.FileName);
-            var result = _carImageService.UpdateCarImage(carImage);
-            if (result.Success)
+            var updated = _carImageService.UpdateCarImage(carImage);
+            if (updated.Success)
             {
                 FileOperations.WriteImageFile(imageFile, _configuration.GetSection("ImageRootPath").Value, carImage.ImagePath);
-                return Ok(result);
+                return Ok(updated);
             }
-            return BadRequest(result);
+            return BadRequest(updated);
         }
 
         [HttpPost("deletecarimage")]
