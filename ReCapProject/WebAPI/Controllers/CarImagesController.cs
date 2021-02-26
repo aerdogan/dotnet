@@ -43,16 +43,16 @@ namespace WebAPI.Controllers
                 return BadRequest(new { Message = "Resim dosya formatı hatalı!" });
             }                
 
-            string imageNewName = Guid.NewGuid() + Path.GetExtension(imageFile.FileName);
+            string newImageName = Guid.NewGuid() + Path.GetExtension(imageFile.FileName);
             var result = _carImageService.UpdateCarImage(new CarImage
             {
                 Id = carImageId,
                 CarId = carId,
-                ImagePath = imageNewName
+                ImagePath = newImageName
             });
             if (result.Success)
             {
-                FileOperations.WriteImageFile(imageFile, @"wwwroot\images", imageNewName);
+                FileOperations.WriteImageFile(imageFile, @"wwwroot\images", newImageName);
                 return Ok(result);
             }
             return BadRequest(result);
@@ -61,11 +61,10 @@ namespace WebAPI.Controllers
         [HttpGet("deletecarimage")]
         public IActionResult DeleteCarImage(int carImageId)
         {
-            CarImage carImage = _carImageService.GetById(carImageId).Data;            
-            if (carImage != null)
+            var carImage = _carImageService.GetById(carImageId);            
+            if (carImage.Success)
             {
-                FileOperations.DeleteImageFile(@"wwwroot\images\", carImage.ImagePath );
-                
+                FileOperations.DeleteImageFile(@"wwwroot\images\", carImage.Data.ImagePath);                
                 var result = _carImageService.DeleteCarImage(new CarImage { Id = carImageId });
                 if (result.Success) return Ok(result);
             }

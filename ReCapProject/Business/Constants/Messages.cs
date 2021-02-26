@@ -2,8 +2,6 @@
 {
     public static class Messages
     {
-
-        /* success messages */
         public static string CarAdded = "Araç eklendi!";
         public static string CarUpdated = "Araç güncellendi!";
         public static string CarDeleted = "Araç silindi!";
@@ -38,8 +36,6 @@
         public static string CarImageUpdated = "Araç resmi güncellendi!";
         public static string CarImageDeleted = "Araç resmi silindi!";
 
-
-        /* error messages */
         public static string CarDailyPriceInvalid = "Aracın günlük fiyatı sıfırdan büyük olmalı!";
         public static string CarNameInvalid = "Araç ismi geçersiz!";
         public static string RentalCarIsntAvailable = "Araç müsait değil!";

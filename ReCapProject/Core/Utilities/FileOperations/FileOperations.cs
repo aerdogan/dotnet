@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Http;
-using System;
 using System.IO;
 
 namespace Core.Utilities.FileOperations
@@ -10,7 +9,7 @@ namespace Core.Utilities.FileOperations
         public static bool WriteImageFile(IFormFile Imagefile, string filePath, string imageNewName)
         {
             try
-            {                
+            {
                 var path = Path.Combine(Directory.GetCurrentDirectory(), filePath, imageNewName);
                 using (var stream = new FileStream(path, FileMode.Create))
                 {
@@ -38,6 +37,5 @@ namespace Core.Utilities.FileOperations
             }
             return false;
         }
-
     }
 }

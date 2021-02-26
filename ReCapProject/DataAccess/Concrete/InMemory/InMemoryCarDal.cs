@@ -1,9 +1,4 @@
-﻿using DataAccess.Abstract;
-using Entities.Concrete;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace DataAccess.Concrete.InMemory
+﻿namespace DataAccess.Concrete.InMemory
 {
     public class InMemoryCarDal /* : ICarDal */
     {
@@ -48,6 +43,5 @@ namespace DataAccess.Concrete.InMemory
             return _cars.SingleOrDefault(c => c.Id == id);
         }
         */
-
     }
 }

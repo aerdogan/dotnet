@@ -22,20 +22,10 @@ namespace Business.Concrete
         [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car car)
         {
-            /*
-            if (car.Name.Length < 3)
-            {                
-                return new ErrorResult(Messages.CarNameInvalid);
-            }
-
-            if (car.DailyPrice <= 0)
-            {
-                return new ErrorResult(Messages.CarDailyPriceInvalid);
-            }
-            */
             _carDal.Add(car);
             return new SuccessResult(Messages.CarAdded);
         }
+
         public IResult Update(Car car)
         {
             if (car.Name.Length < 3)

@@ -6,5 +6,6 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class EfUserDal : EfEntityRepositoryBase<User, NorthwindContext>, IUserDal
     {
+    
     }
 }
