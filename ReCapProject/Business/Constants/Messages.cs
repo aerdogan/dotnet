@@ -34,13 +34,17 @@
         public static string RentalDeleted = "Kiralama silindi!";
         public static string RentalsListed = "Kiradaki Araçlar listelendi!";
 
+        public static string CarImageAdded = "Araç resmi eklendi!";
+        public static string CarImageUpdated = "Araç resmi güncellendi!";
+        public static string CarImageDeleted = "Araç resmi silindi!";
+
 
         /* error messages */
         public static string CarDailyPriceInvalid = "Aracın günlük fiyatı sıfırdan büyük olmalı!";
         public static string CarNameInvalid = "Araç ismi geçersiz!";
-
         public static string RentalCarIsntAvailable = "Araç müsait değil!";
-
-        
+        public static string CarImageNotAdded = "Araç resmi eklenemedi!";
+        public static string CarImageCountExceeded = "Bir araca maksimum 5 resim eklenebilir!";
+        public static string CarImageNotFound = "Araç resmi bulunamadı!";
     }
 }
