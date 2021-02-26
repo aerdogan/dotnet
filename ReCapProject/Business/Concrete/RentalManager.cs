@@ -26,7 +26,7 @@ namespace Business.Concrete
                 _rentalDal.Add(rental);
                 return new SuccessResult(Messages.RentalAdded);
             }
-            return new ErrorResult(Messages.RentalCarIsntAvailable);
+            return new ErrorResult(Messages.CarIsntAvailable);
         }
 
         public IResult Update(Rental rental)
