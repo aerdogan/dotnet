@@ -17,7 +17,7 @@
 
         }
 
-        public ErrorDataResult(object carImageIsNotExist) : base(default, false)
+        public ErrorDataResult() : base(default, false)
         {
 
         }
