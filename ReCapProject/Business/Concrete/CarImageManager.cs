@@ -53,7 +53,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.CarImageDeleted);
         }
 
-        public IResult CheckCarImagesCount(int carId)
+        private IResult CheckCarImagesCount(int carId)
         {
             if (_carImageDal.GetAll(ci => ci.CarId == carId).Count < 5)
             {

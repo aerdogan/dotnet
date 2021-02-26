@@ -6,12 +6,12 @@ namespace Core.Utilities.FileOperations
     public static class FileOperations
     {
 
-        public static bool WriteImageFile(IFormFile Imagefile, string filePath, string imageNewName)
+        public static bool WriteImageFile(IFormFile Imagefile, string filePath, string newImageName)
         {
             try
             {
-                var path = Path.Combine(Directory.GetCurrentDirectory(), filePath, imageNewName);
-                using (var stream = new FileStream(path, FileMode.Create))
+                var fullPath = Path.Combine(filePath, newImageName);
+                using (var stream = new FileStream(fullPath, FileMode.Create))
                 {
                     Imagefile.CopyTo(stream);
                 }
@@ -23,13 +23,13 @@ namespace Core.Utilities.FileOperations
 
         public static bool CheckImageFile(IFormFile file)
         {
-            var extension = "." + file.FileName.Split('.')[file.FileName.Split('.').Length - 1];
+            var extension = Path.GetExtension(file.FileName);
             return (extension == ".jpg" || extension == ".jpeg" || extension == ".png");
         }
 
         public static bool DeleteImageFile(string filePath, string fileName)
         {
-            string fullPath = filePath + fileName;
+            string fullPath = Path.Combine(filePath, fileName);
             if (File.Exists(fullPath))
             {
                 File.Delete(fullPath);
