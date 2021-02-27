@@ -39,7 +39,6 @@
         public static string CarDailyPriceInvalid = "Aracın günlük fiyatı sıfırdan büyük olmalı!";
         public static string CarNameInvalid = "Araç ismi geçersiz!";
         public static string CarIsntAvailable = "Araç müsait değil!";
-        public static string CarImageNotAdded = "Araç resmi eklenemedi!";
         public static string CarImageCountExceeded = "Bir araca maksimum 5 resim eklenebilir!";
         public static string CarImageNotFound = "Araç resmi bulunamadı!";
         public static object InvalidImageFileFormat = "Resim dosya formatı hatalı!";

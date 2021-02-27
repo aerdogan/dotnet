@@ -21,12 +21,9 @@ namespace Business.Concrete
 
         public IResult Add(Rental rental)
         {
-            if (CarIsAvailable( rental.CarId))
-            {
-                _rentalDal.Add(rental);
-                return new SuccessResult(Messages.RentalAdded);
-            }
-            return new ErrorResult(Messages.CarIsntAvailable);
+            if (!CarIsAvailable(rental.CarId)) return new ErrorResult(Messages.CarIsntAvailable);
+            _rentalDal.Add(rental);
+            return new SuccessResult(Messages.RentalAdded);
         }
 
         public IResult Update(Rental rental)

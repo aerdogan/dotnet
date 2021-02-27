@@ -1,29 +1,25 @@
 ﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.IO;
 
 namespace Core.Utilities.FileOperations
 {
     public static class FileOperations
     {
-
-        public static bool WriteImageFile(IFormFile Imagefile, string filePath, string newImageName)
+        public static string SaveImageFile(IFormFile imageFile)
         {
-            try
+            string newImageName = Guid.NewGuid() + Path.GetExtension(imageFile.FileName);
+            var fullPath = Path.Combine(@"wwwroot\images", newImageName);
+            using (var stream = new FileStream(fullPath, FileMode.Create))
             {
-                var fullPath = Path.Combine(filePath, newImageName);
-                using (var stream = new FileStream(fullPath, FileMode.Create))
-                {
-                    Imagefile.CopyTo(stream);
-                }
-                return true;
+                imageFile.CopyTo(stream);
             }
-            catch { }
-            return false;
+            return newImageName;
         }
 
-        public static bool DeleteImageFile(string filePath, string fileName)
+        public static bool DeleteImageFile(string fileName)
         {
-            string fullPath = Path.Combine(filePath, fileName);
+            string fullPath = Path.Combine(@"wwwroot\images", fileName);
             if (File.Exists(fullPath))
             {
                 File.Delete(fullPath);
