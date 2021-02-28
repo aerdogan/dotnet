@@ -16,7 +16,7 @@ namespace Business.Concrete
 {
     public class CarImageManager : ICarImageService
     {
-        private readonly ICarImageDal _carImageDal;
+        ICarImageDal _carImageDal;
 
         public CarImageManager(ICarImageDal carImageDal)
         {
@@ -41,21 +41,21 @@ namespace Business.Concrete
         [ValidationAspect(typeof(UpdateCarImageValidator))]
         public IResult Update(CarImagesDto carImagesDto)
         {
-            var entity = _carImageDal.Get(ci => ci.Id == carImagesDto.Id);
-            if (entity == null) return new ErrorResult(Messages.CarImageNotFound);
-            FileOperations.DeleteImageFile(entity.ImagePath);
-            entity.ImagePath = FileOperations.SaveImageFile(carImagesDto.ImageFile);
-            entity.Date = DateTime.Now;
-            _carImageDal.Update(entity);
+            var result = _carImageDal.Get(ci => ci.Id == carImagesDto.Id);
+            if (result == null) return new ErrorResult(Messages.CarImageNotFound);
+            FileOperations.DeleteImageFile(result.ImagePath);
+            result.ImagePath = FileOperations.SaveImageFile(carImagesDto.ImageFile);
+            result.Date = DateTime.Now;
+            _carImageDal.Update(result);
             return new SuccessResult(Messages.CarImageUpdated);
         }
 
         public IResult Delete(int id)
         {
-            var entity = _carImageDal.Get(ci => ci.Id == id);
-            if (entity == null) return new ErrorResult(Messages.CarImageNotFound);
-            FileOperations.DeleteImageFile(entity.ImagePath);
-            _carImageDal.Delete(entity);
+            var result = _carImageDal.Get(ci => ci.Id == id);
+            if (result == null) return new ErrorResult(Messages.CarImageNotFound);
+            FileOperations.DeleteImageFile(result.ImagePath);
+            _carImageDal.Delete(result);
             return new SuccessResult(Messages.CarImageDeleted);
         }
 
@@ -68,9 +68,9 @@ namespace Business.Concrete
 
         public IDataResult<CarImage> GetById(int carImageId)
         {
-            CarImage carImage = _carImageDal.Get(ci => ci.Id == carImageId);
-            if (carImage == null) return new ErrorDataResult<CarImage>(Messages.CarImageNotFound);
-            return new SuccessDataResult<CarImage>(carImage);
+            CarImage result = _carImageDal.Get(ci => ci.Id == carImageId);
+            if (result == null) return new ErrorDataResult<CarImage>(Messages.CarImageNotFound);
+            return new SuccessDataResult<CarImage>(result);
         }
 
         public IDataResult<List<CarImage>> GetByCarId(int carId)
@@ -90,8 +90,8 @@ namespace Business.Concrete
 
         public IResult DeleteByCarId(int carId)
         {
-            var entity = _carImageDal.GetAll(ci => ci.CarId == carId);
-            foreach (var item in entity)
+            var result = _carImageDal.GetAll(ci => ci.CarId == carId);
+            foreach (var item in result)
             {
                 FileOperations.DeleteImageFile(item.ImagePath);
                 _carImageDal.Delete(item);

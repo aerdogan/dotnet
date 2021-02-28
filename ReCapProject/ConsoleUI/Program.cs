@@ -1,4 +1,5 @@
 ﻿using Business.Concrete;
+using Core.Entities.Concrete;
 using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
 using System;
@@ -46,7 +47,6 @@ namespace ConsoleUI
             user.FirstName = firstName;
             user.LastName = lastName;
             user.Email = email;
-            user.Password = password;
             var result = userManager.Add(user);
             Console.WriteLine(result.Message);
             return user;
@@ -85,7 +85,7 @@ namespace ConsoleUI
 
         private static Car CreateCar( Brand brand, Color color, int modelYear, decimal dailyPrice, string description )
         {
-            CarManager carManager = new CarManager(new EfCarDal());
+            CarManager carManager = new CarManager(new EfCarDal(), new CarImageManager( new EfCarImageDal() ));
             Car car = new Car();
             car.Name = brand.Name;
             car.BrandId = brand.Id;
@@ -100,7 +100,7 @@ namespace ConsoleUI
 
         private static void ListCars()
         {
-            CarManager carManager = new CarManager(new EfCarDal());
+            CarManager carManager = new CarManager(new EfCarDal() , new CarImageManager( new EfCarImageDal()));
             var result = carManager.GetCarDetails();
             if (result.Success)
             {

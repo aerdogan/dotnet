@@ -63,9 +63,9 @@ namespace Business.Concrete
         {
             using (NorthwindContext context = new NorthwindContext())
             {
-                Rental rental = _rentalDal.Get(r => r.CarId == carId && r.ReturnDate == null);
-                rental.ReturnDate = DateTime.Now;
-                _rentalDal.Update(rental);
+                Rental result = _rentalDal.Get(r => r.CarId == carId && r.ReturnDate == null);
+                result.ReturnDate = DateTime.Now;
+                _rentalDal.Update(result);
             }
             return new SuccessResult(Messages.RentalUpdated);;
         }
