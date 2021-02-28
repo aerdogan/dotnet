@@ -7,8 +7,18 @@ namespace Business.ValidationRules.FluentValidation
     {
         public CarImageValidator()
         {
-            
-            RuleFor(x => x.ImageFile).NotNull().WithMessage("Dosya alanı boş olamaz.");
+
+            When(x => x.Id == 0, () =>
+            {
+                RuleFor(x => x.CarId).NotNull().WithMessage("CarId boş geçilemez.");
+            });
+
+            When(x => x.CarId == 0, () =>
+            {
+                RuleFor(x => x.Id).NotNull().WithMessage("Id alanı boş geçilemez.");
+            });
+
+            RuleFor(x => x.ImageFile).NotNull();
 
             RuleFor(x => x.ImageFile.Length).LessThanOrEqualTo(1024 * 500)
                 .WithMessage("Dosya boyutu en fazla 500kb olmalıdır.");

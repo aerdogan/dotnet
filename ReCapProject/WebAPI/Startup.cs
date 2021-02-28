@@ -1,3 +1,4 @@
+using Core.Utilities.FileOperations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -18,6 +19,8 @@ namespace WebAPI
 
         public void ConfigureServices(IServiceCollection services)
         {
+            FileOperations.ImagePath = Configuration["Paths:ImagesPath"];
+
             services.AddControllers();
 
             services.AddSwaggerGen(c =>
