@@ -23,7 +23,7 @@ namespace Business.Concrete
             _carImageDal = carImageDal;
         }
 
-        [ValidationAspect(typeof(CarImageValidator))]
+        [ValidationAspect(typeof(AddCarImageValidator))]
         public IResult Add(CarImagesDto carImagesDto)
         {
             var result = BusinessRules.Run(CheckCarImagesCount(carImagesDto.CarId));
@@ -38,7 +38,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.CarImageAdded);
         }
 
-        [ValidationAspect(typeof(CarImageValidator))]
+        [ValidationAspect(typeof(UpdateCarImageValidator))]
         public IResult Update(CarImagesDto carImagesDto)
         {
             var entity = _carImageDal.Get(ci => ci.Id == carImagesDto.Id);

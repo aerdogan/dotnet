@@ -7,25 +7,29 @@ namespace Business.ValidationRules.FluentValidation
     {
         public CarImageValidator()
         {
-
-            When(x => x.Id == 0, () =>
-            {
-                RuleFor(x => x.CarId).NotNull().WithMessage("CarId boş geçilemez.");
-            });
-
-            When(x => x.CarId == 0, () =>
-            {
-                RuleFor(x => x.Id).NotNull().WithMessage("Id alanı boş geçilemez.");
-            });
-
             RuleFor(x => x.ImageFile).NotNull();
 
             RuleFor(x => x.ImageFile.Length).LessThanOrEqualTo(1024 * 500)
-                .WithMessage("Dosya boyutu en fazla 500kb olmalıdır.");
+                    .WithMessage("Dosya boyutu en fazla 500kb olmalıdır.");
 
             RuleFor(x => x.ImageFile.ContentType).NotNull().Must(x => x.Equals("image/jpeg") || x.Equals("image/jpg") || x.Equals("image/png"))
-                .WithMessage("Dosya türü desteklenmiyor!");
+                    .WithMessage("Dosya türü desteklenmiyor!");
         }
+    }
 
+    public class AddCarImageValidator : CarImageValidator
+    {
+        public AddCarImageValidator()
+        {
+            RuleFor(x => x.CarId).GreaterThan(0).WithMessage("CarId boş geçilemez.");
+        }
+    }
+
+    public class UpdateCarImageValidator : CarImageValidator
+    {
+        public UpdateCarImageValidator()
+        {
+            RuleFor(x => x.Id).GreaterThan(0).WithMessage("Id alanı boş geçilemez.");
+        }
     }
 }
