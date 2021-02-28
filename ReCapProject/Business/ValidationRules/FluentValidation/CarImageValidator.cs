@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace Business.ValidationRules.FluentValidation
 {
-    public class CarImageValidator : AbstractValidator<CarImagesDto>
+    public class CarImageValidator<T> : AbstractValidator<CarImagesDto>
     {
         public CarImageValidator()
         {
@@ -17,7 +17,7 @@ namespace Business.ValidationRules.FluentValidation
         }
     }
 
-    public class AddCarImageValidator : CarImageValidator
+    public class AddCarImageValidator : CarImageValidator<CarImagesDto>
     {
         public AddCarImageValidator()
         {
@@ -25,7 +25,7 @@ namespace Business.ValidationRules.FluentValidation
         }
     }
 
-    public class UpdateCarImageValidator : CarImageValidator
+    public class UpdateCarImageValidator : CarImageValidator<CarImagesDto>
     {
         public UpdateCarImageValidator()
         {
