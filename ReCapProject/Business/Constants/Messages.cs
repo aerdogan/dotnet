@@ -35,6 +35,7 @@
         public static string CarImageAdded = "Araç resmi eklendi!";
         public static string CarImageUpdated = "Araç resmi güncellendi!";
         public static string CarImageDeleted = "Araç resmi silindi!";
+        public static string CarImagesDeleted = "Araç resimleri silindi!";
 
         public static string CarDailyPriceInvalid = "Aracın günlük fiyatı sıfırdan büyük olmalı!";
         public static string CarNameInvalid = "Araç ismi geçersiz!";
@@ -42,5 +43,6 @@
         public static string CarImageCountExceeded = "Bir araca maksimum 5 resim eklenebilir!";
         public static string CarImageNotFound = "Araç resmi bulunamadı!";
         public static object InvalidImageFileFormat = "Resim dosya formatı hatalı!";
+
     }
 }

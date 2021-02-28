@@ -1,12 +1,13 @@
-﻿using Entities.Concrete;
+﻿using Entities.DTOs;
 using FluentValidation;
 
 namespace Business.ValidationRules.FluentValidation
 {
-    public class CarImageValidator : AbstractValidator<CarImage>
+    public class CarImageValidator : AbstractValidator<CarImagesDto>
     {
         public CarImageValidator()
         {
+            
             RuleFor(x => x.ImageFile).NotNull().WithMessage("Dosya alanı boş olamaz.");
 
             RuleFor(x => x.ImageFile.Length).LessThanOrEqualTo(1024 * 500)

@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
@@ -15,25 +16,33 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add([FromForm] CarImage carImage)
+        public IActionResult Add([FromForm] CarImagesDto carImagesDto)
         {
-            var result = _carImageService.Add(carImage);
+            var result = _carImageService.Add(carImagesDto);
             if (!result.Success) return BadRequest(result);
             return Ok(result);
         }
 
         [HttpPut]
-        public IActionResult Update([FromForm] CarImage carImage)
+        public IActionResult Update([FromForm] CarImagesDto carImagesDto)
         {
-            var result = _carImageService.Update(carImage);
+            var result = _carImageService.Update(carImagesDto);
             if (!result.Success) return BadRequest(result);
             return Ok(result);
         }
 
-        [HttpDelete]
-        public IActionResult Delete([FromForm] CarImage carImage)
+        [HttpDelete("delete")]
+        public IActionResult Delete(int id)
         {
-            var result = _carImageService.Delete(carImage);
+            var result = _carImageService.Delete(id);
+            if (!result.Success) return BadRequest(result);
+            return Ok(result);
+        }
+
+        [HttpDelete("deletebycarid")]
+        public IActionResult DeleteByCarId(int carId)
+        {
+            var result = _carImageService.DeleteByCarId(carId);
             if (!result.Success) return BadRequest(result);
             return Ok(result);
         }
