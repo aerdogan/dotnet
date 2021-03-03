@@ -4,7 +4,6 @@ using Business.DependencyResolvers.Autofac;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-
 namespace WebAPI
 {
     public class Program
@@ -26,5 +25,4 @@ namespace WebAPI
                 webBuilder.UseStartup<Startup>(); 
             });
     }
-
 }
