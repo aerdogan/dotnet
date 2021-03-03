@@ -1,3 +1,5 @@
+using Core.DependecyResolvers;
+using Core.Extensions;
 using Core.Utilities.IoC;
 using Core.Utilities.Security.Encryption;
 using Core.Utilities.Security.Jwt;
@@ -48,7 +50,11 @@ namespace WebAPI
                 };
             });
 
-            ServiceTool.Create(services);
+            services.AddDependencyResolvers(new ICoreModule[] {
+                new CoreModule()
+            }) ;
+
+            // ServiceTool.Create(services);
 
             // Register Swagger  
             services.AddSwaggerGen(c =>
@@ -74,6 +80,8 @@ namespace WebAPI
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
