@@ -3,16 +3,13 @@ using FluentValidation;
 
 namespace Business.ValidationRules.FluentValidation
 {
-    public partial class CarValidator
+    public class ColorValidator : AbstractValidator<Color>
     {
-        public class ColorValidator : AbstractValidator<Color>
+        public ColorValidator()
         {
-            public ColorValidator()
-            {
-                RuleFor(c => c.Name).NotEmpty();
-                RuleFor(c => c.Id).GreaterThan(0);
-            }
+            //RuleFor(c => c.Id).GreaterThan(0).WithMessage("Id alanı boş geçilemez.");
+            RuleFor(c => c.Name).NotEmpty().WithMessage("Renk alanı boş geçilemez.");
         }
-
     }
+
 }

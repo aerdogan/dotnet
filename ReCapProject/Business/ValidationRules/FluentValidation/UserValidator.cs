@@ -3,18 +3,14 @@ using FluentValidation;
 
 namespace Business.ValidationRules.FluentValidation
 {
-    public partial class CarValidator
+    public class UserValidator : AbstractValidator<User>
     {
-        public class UserValidator : AbstractValidator<User>
+        public UserValidator()
         {
-            public UserValidator()
-            {
-                RuleFor(u => u.FirstName).NotEmpty();
-                RuleFor(u => u.LastName).NotEmpty();
-                RuleFor(u => u.Email).NotEmpty();
-                RuleFor(u => u.Email).EmailAddress();
-            }
+            RuleFor(u => u.FirstName).NotEmpty().WithMessage("İsim boş geçilemez.");
+            RuleFor(u => u.LastName).NotEmpty().WithMessage("Soyisim boş geçilemez.");
+            RuleFor(u => u.Email).NotEmpty().WithMessage("Email boş geçilemez.");
+            RuleFor(u => u.Email).EmailAddress().WithMessage("Email adresi hatalı.");
         }
-
     }
 }

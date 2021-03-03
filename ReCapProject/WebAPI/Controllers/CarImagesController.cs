@@ -1,5 +1,4 @@
 ﻿using Business.Abstract;
-using Entities.Concrete;
 using Entities.DTOs;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,7 +14,7 @@ namespace WebAPI.Controllers
             _carImageService = carImageService;
         }
 
-        [HttpPost]
+        [HttpPost("add")]
         public IActionResult Add([FromForm] CarImagesDto carImagesDto)
         {
             var result = _carImageService.Add(carImagesDto);
@@ -23,7 +22,7 @@ namespace WebAPI.Controllers
             return Ok(result);
         }
 
-        [HttpPut]
+        [HttpPost("update")]
         public IActionResult Update([FromForm] CarImagesDto carImagesDto)
         {
             var result = _carImageService.Update(carImagesDto);
@@ -31,15 +30,15 @@ namespace WebAPI.Controllers
             return Ok(result);
         }
 
-        [HttpDelete("delete")]
-        public IActionResult Delete(int id)
+        [HttpPost("delete")]
+        public IActionResult Delete(CarImagesDto carImagesDto)
         {
-            var result = _carImageService.Delete(id);
+            var result = _carImageService.Delete(carImagesDto);
             if (!result.Success) return BadRequest(result);
             return Ok(result);
         }
 
-        [HttpDelete("deletebycarid")]
+        [HttpPost("deletebycarid")]
         public IActionResult DeleteByCarId(int carId)
         {
             var result = _carImageService.DeleteByCarId(carId);
@@ -63,8 +62,8 @@ namespace WebAPI.Controllers
             return Ok(result);
         }
 
-        [HttpGet("getall")]
-        public IActionResult GetAll()
+        [HttpGet("getlist")]
+        public IActionResult GetList()
         {
             var result = _carImageService.GetAll();
             if (!result.Success) return BadRequest(result);

@@ -2,20 +2,23 @@
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class EfCarDal : EfEntityRepositoryBase<Car, NorthwindContext>, ICarDal
+    public class EfCarDal : EfEntityRepositoryBase<Car, ReCapContext>, ICarDal
     {
         public List<Car> GetCarsByBrandId(int brandId)
         {
-            using (NorthwindContext context = new NorthwindContext())
+            using (ReCapContext context = new ReCapContext())
             {
                 var result = from c in context.Cars
                              join b in context.Brands
                              on c.BrandId equals b.Id
+                             where c.BrandId == brandId
                              select c;
 
                 return result.ToList();
@@ -24,33 +27,39 @@ namespace DataAccess.Concrete.EntityFramework
 
         public List<Car> GetCarsByColorId(int colorId)
         {
-            using (NorthwindContext context = new NorthwindContext())
+            using (ReCapContext context = new ReCapContext())
             {
                 var result = from c in context.Cars
                              join cl in context.Colors
                              on c.ColorId equals cl.Id
+                             where c.ColorId == colorId
                              select c;
 
                 return result.ToList();
             }
         }
 
-        public List<CarDetailDto> GetCarDetails()
+        public List<CarDetailDto> GetCarDetails(Expression<Func<CarDetailDto, bool>> filter = null)
         {
-            using (NorthwindContext context = new NorthwindContext())
+            using (ReCapContext context = new ReCapContext())
             {
                 var result = from c in context.Cars
-                             join b in context.Brands on c.BrandId equals b.Id
-                             join cl in context.Colors on c.ColorId equals cl.Id
+                             join co in context.Colors
+                             on c.ColorId equals co.Id
+                             join b in context.Brands
+                             on c.BrandId equals b.Id
                              select new CarDetailDto
                              {
-                                 CarName = c.Name,
                                  BrandName = b.Name,
-                                 ColorName = cl.Name,
-                                 DailyPrice = c.DailyPrice
+                                 ColorName = co.Name,
+                                 DailyPrice = c.DailyPrice,
+                                 CarName = c.Name
                              };
-                return result.ToList();
+                return filter == null ? result.ToList() : result.Where(filter).ToList();
             }
         }
+
+
+
     }
 }

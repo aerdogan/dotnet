@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
@@ -23,7 +24,8 @@ namespace Business.Concrete
             _carImageDal = carImageDal;
         }
 
-        [ValidationAspect(typeof(AddCarImageValidator))]
+        //[SecuredOperation("carimage.add,admin")]
+        [ValidationAspect(typeof(CarImageValidator))]
         public IResult Add(CarImagesDto carImagesDto)
         {
             var result = BusinessRules.Run(CheckCarImagesCount(carImagesDto.CarId));
@@ -38,7 +40,8 @@ namespace Business.Concrete
             return new SuccessResult(Messages.CarImageAdded);
         }
 
-        [ValidationAspect(typeof(UpdateCarImageValidator))]
+        //[SecuredOperation("carimage.add,admin")]
+        [ValidationAspect(typeof(CarImageValidator))]
         public IResult Update(CarImagesDto carImagesDto)
         {
             var result = _carImageDal.Get(ci => ci.Id == carImagesDto.Id);
@@ -50,9 +53,10 @@ namespace Business.Concrete
             return new SuccessResult(Messages.CarImageUpdated);
         }
 
-        public IResult Delete(int id)
+        //[SecuredOperation("brand.delete,admin")]
+        public IResult Delete(CarImagesDto carImagesDto)
         {
-            var result = _carImageDal.Get(ci => ci.Id == id);
+            var result = _carImageDal.Get(ci => ci.Id == carImagesDto.Id);
             if (result == null) return new ErrorResult(Messages.CarImageNotFound);
             FileOperations.DeleteImageFile(result.ImagePath);
             _carImageDal.Delete(result);
@@ -79,7 +83,7 @@ namespace Business.Concrete
             if (result.Any()) return new SuccessDataResult<List<CarImage>>(result);
             return new SuccessDataResult<List<CarImage>>(new List<CarImage> 
             {
-                new CarImage{ ImagePath = "default.jpg", Date = DateTime.Now }
+                new CarImage{  CarId = carId,  ImagePath = "default.jpg", Date = DateTime.Now }
             });
         }
 

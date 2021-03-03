@@ -3,17 +3,11 @@ using FluentValidation;
 
 namespace Business.ValidationRules.FluentValidation
 {
-    public partial class CarValidator
+    public class RentalValidator : AbstractValidator<Rental>
     {
-        public class RentalValidator : AbstractValidator<Rental>
+        public RentalValidator()
         {
-            public RentalValidator()
-            {
-                RuleFor(r => r.CarId).GreaterThan(0);
-                RuleFor(r => r.CustomerId).GreaterThan(0);
-                RuleFor(r => r.RentDate).NotNull();
-            }
+            RuleFor(r => r.RentDate).NotNull().WithMessage("Kiralama tarihi boş geçilemez.");
         }
-
     }
 }
