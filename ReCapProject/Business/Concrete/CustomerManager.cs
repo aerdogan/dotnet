@@ -19,7 +19,7 @@ namespace Business.Concrete
             _customerDal = customerDal;
         }
 
-        //[SecuredOperation("customer.add,admin")]
+        [SecuredOperation("customer.add")]
         [ValidationAspect(typeof(CustomerValidator))]
         public IResult Add(Customer customer)
         {
@@ -27,7 +27,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.CustomerAdded);
         }
 
-        //[SecuredOperation("customer.update,admin")]
+        [SecuredOperation("customer.update")]
         [ValidationAspect(typeof(CustomerValidator))]
         public IResult Update(Customer customer)
         {
@@ -35,7 +35,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.CustomerUpdated);
         }
 
-        //[SecuredOperation("customer.delete,admin")]
+        [SecuredOperation("customer.delete")]
         public IResult Delete(Customer customer)
         {
             _customerDal.Delete(customer);

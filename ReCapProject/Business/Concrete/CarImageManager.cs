@@ -3,6 +3,7 @@ using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
+using Core.Aspects.Cancelation;
 using Core.Utilities.Business;
 using Core.Utilities.FileOperations;
 using Core.Utilities.Results;
@@ -24,8 +25,9 @@ namespace Business.Concrete
             _carImageDal = carImageDal;
         }
 
-        //[SecuredOperation("carimage.add,admin")]
+        [SecuredOperation("carimage.add")]
         [ValidationAspect(typeof(CarImageValidator))]
+        [CancellationTokenAspect]
         public IResult Add(CarImagesDto carImagesDto)
         {
             var result = BusinessRules.Run(CheckCarImagesCount(carImagesDto.CarId));
@@ -40,7 +42,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.CarImageAdded);
         }
 
-        //[SecuredOperation("carimage.add,admin")]
+        [SecuredOperation("carimage.update")]
         [ValidationAspect(typeof(CarImageValidator))]
         public IResult Update(CarImagesDto carImagesDto)
         {
@@ -53,7 +55,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.CarImageUpdated);
         }
 
-        //[SecuredOperation("brand.delete,admin")]
+        [SecuredOperation("carimage.delete")]
         public IResult Delete(CarImagesDto carImagesDto)
         {
             var result = _carImageDal.Get(ci => ci.Id == carImagesDto.Id);

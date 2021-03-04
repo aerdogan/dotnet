@@ -18,14 +18,14 @@ namespace Business.Concrete
             _colorDal = colorDal;
         }
 
-        //[SecuredOperation("color.add,admin")]
+        [SecuredOperation("color.add")]
         [ValidationAspect(typeof(ColorValidator))]
         public IResult Add(Color color)
         {
             _colorDal.Add(color);
             return new SuccessResult(Messages.ColorAdded);
         }
-        //[SecuredOperation("color.update,admin")]
+        [SecuredOperation("color.update")]
         [ValidationAspect(typeof(ColorValidator))]
         public IResult Update(Color color)
         {
@@ -33,7 +33,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.ColorUpdated);
         }
 
-        //[SecuredOperation("color.delete,admin")]
+        [SecuredOperation("color.delete")]
         public IResult Delete(Color color)
         {
             _colorDal.Delete(color);

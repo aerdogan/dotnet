@@ -2,12 +2,17 @@
 using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Caching;
+using Core.Aspects.Autofac.Performance;
+using Core.Aspects.Autofac.Transaction;
 using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
+using System;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace Business.Concrete
 {
@@ -22,7 +27,8 @@ namespace Business.Concrete
             _carImageService = carImageService;
         }
 
-        //[SecuredOperation("car.add,admin")]
+        //[CacheRemoveAspect("car")]
+        [SecuredOperation("car.add")]
         [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car car)
         {
@@ -30,7 +36,24 @@ namespace Business.Concrete
             return new SuccessResult(Messages.CarAdded);
         }
 
-        //[SecuredOperation("car.update,admin")]
+        [CacheRemoveAspect("car")]
+        [TransactionAspect]
+        [PerformanceAspect(1)]
+        public IResult AddTransactionTest(Car entity)
+        {
+            Thread.Sleep(2000);
+            _carDal.Add(entity);
+            if (entity.BrandId == 0)
+            {
+                throw new Exception("");
+            }
+            entity.Id = 0;
+            entity.Description = "TransactionTest" + entity.Description;
+            _carDal.Add(entity);
+            return new SuccessResult(Messages.CarAdded);
+        }
+
+        [SecuredOperation("car.update")]
         [ValidationAspect(typeof(CarValidator))]
         public IResult Update(Car car)
         {
@@ -40,7 +63,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.CarUpdated);
         }
 
-        //[SecuredOperation("car.delete,admin")]
+        [SecuredOperation("car.delete")]
         public IResult Delete(Car car)
         {
             _carImageService.DeleteByCarId(car.Id);
@@ -48,6 +71,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.CarDeleted);
         }
 
+        [CacheAspect]
         public IDataResult<List<Car>> GetAll()
         {
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(), Messages.CarsListed);

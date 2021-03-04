@@ -18,7 +18,7 @@ namespace Business.Concrete
             _userDal = userDal;
         }
 
-        //[SecuredOperation("user.add,admin")]
+        [SecuredOperation("user.add")]
         [ValidationAspect(typeof(UserValidator))]
         public IResult Add(User user)
         {
@@ -26,7 +26,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.UserAdded);
         }
 
-        //[SecuredOperation("user.update,admin")]
+        [SecuredOperation("user.update")]
         [ValidationAspect(typeof(UserValidator))]
         public IResult Update(User user)
         {
@@ -34,7 +34,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.UserUpdated);
         }
 
-        //[SecuredOperation("user.delete,admin")]
+        [SecuredOperation("user.delete")]
         public IResult Delete(User user)
         {
             _userDal.Delete(user);
