@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Comment CommentText="ŞABLON TASARIM KALIBI&#xD;&#xA;En çok kullanılan tasarım desenlerinden biridir&#xD;&#xA;iç işlemleri abstract class ile soyutlayıp&#xD;&#xA;implemente edecek sınıflar oluşturularak istenildiği şekilde kullanılabilir">
+    <Position X="4.657" Y="0.5" Height="1.137" Width="3.19" />
+  </Comment>
+  <Class Name="TemplatePattern.Program">
+    <Position X="0.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TemplatePattern.ScoringAlgorithm">
+    <Position X="2.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAoAAIBAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TemplatePattern.MensScoringAlgorithm">
+    <Position X="4.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAoAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TemplatePattern.WomensScoringAlgorithm">
+    <Position X="0.75" Y="2.75" Width="1.5" />
+    <InheritanceLine Type="TemplatePattern.ScoringAlgorithm" FixedToPoint="true">
+      <Path>
+        <Point X="3.5" Y="2.18" />
+        <Point X="3.5" Y="2.38" />
+        <Point X="1.562" Y="2.38" />
+        <Point X="1.562" Y="2.75" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAoAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TemplatePattern.ChildrensScoringAlgorithm">
+    <Position X="2.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAoAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
