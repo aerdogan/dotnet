@@ -9,15 +9,15 @@ namespace CompositePattern
         static void Main(string[] args)
         {            
             Employee ahmet = new Employee { Name = "Ahmet" };            
-            Employee berat = new Employee { Name = "Ali" };
-            Employee elif = new Employee { Name = "Hasan" };
-            Employee malike = new Employee { Name = "Hüseyin" };
+            Employee ali = new Employee { Name = "Ali" };
+            Employee hasan = new Employee { Name = "Hasan" };
+            Employee huseyin = new Employee { Name = "Hüseyin" };
             Contractor test = new Contractor { Name = "Test" };
 
-            ahmet.AddSubOrdinate(berat);
-            ahmet.AddSubOrdinate(elif);
-            elif.AddSubOrdinate(malike);
-            berat.AddSubOrdinate(test);
+            ahmet.AddSubOrdinate(ali);
+            ahmet.AddSubOrdinate(hasan);
+            hasan.AddSubOrdinate(huseyin);
+            huseyin.AddSubOrdinate(test);
 
             Console.WriteLine(ahmet.Name);
             foreach (Employee manager in ahmet)
