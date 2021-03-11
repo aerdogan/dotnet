@@ -106,7 +106,7 @@ namespace ConsoleUI
             {
                 foreach (var car in result.Data)
                 {
-                    Console.WriteLine("Araç: " + car.CarName + " Marka: " + car.BrandName + " Color: " + car.ColorName + " Fiyat: " + car.DailyPrice);
+                    Console.WriteLine("Araç: " + car.BrandName + " Color: " + car.ColorName + " Fiyat: " + car.DailyPrice);
                 }
             }
             else

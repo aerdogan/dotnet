@@ -50,10 +50,12 @@ namespace DataAccess.Concrete.EntityFramework
                              on c.BrandId equals b.Id
                              select new CarDetailDto
                              {
-                                 BrandName = b.Name,
+                                 Id = c.Id,
                                  ColorName = co.Name,
+                                 BrandName = b.Name,
+                                 ModelYear = c.ModelYear,
                                  DailyPrice = c.DailyPrice,
-                                 CarName = c.Name
+                                 Description = c.Description
                              };
                 return filter == null ? result.ToList() : result.Where(filter).ToList();
             }

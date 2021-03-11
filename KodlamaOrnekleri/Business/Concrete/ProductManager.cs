@@ -36,15 +36,14 @@ namespace Business.Concrete
             return new SuccessDataResult<Product>(_productDal.Get(p => p.ProductId == productId));
         }
 
-        [PerformanceAspect(5)]
+        [CacheAspect(duration: 10)]
         public IDataResult<List<Product>> GetAll()
         {
-            Thread.Sleep(5000);
-            return new SuccessDataResult<List<Product>>(_productDal.GetAll().ToList());
+            return new SuccessDataResult<List<Product>>(_productDal.GetAll().ToList(), Messages.ProductsListed);
         }
 
-        [SecuredOperation("Product.List,Admin")]
-        [LogAspect(typeof(FileLogger))]
+        //[SecuredOperation("Product.List,Admin")]
+        //[LogAspect(typeof(FileLogger))]
         [CacheAspect(duration: 10)]
         public IDataResult<List<Product>> GetListByCategory(int categoryId)
         {
