@@ -13,7 +13,7 @@ namespace Business.ValidationRules.FluentValidation
             RuleFor(p => p.UnitPrice).GreaterThan(0);
             RuleFor(p => p.UnitPrice).GreaterThanOrEqualTo(10).When(p => p.CategoryId == 1);
 
-            RuleFor(p => p.ProductName).Must(StartWithA).WithMessage("ürün adı a ile başlamalı");
+            RuleFor(p => p.ProductName).Must(StartWithA).WithMessage("ürün adı A ile başlamalı");
 
         }
 

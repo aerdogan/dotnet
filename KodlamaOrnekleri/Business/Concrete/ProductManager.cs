@@ -80,12 +80,11 @@ namespace Business.Concrete
         private IResult CheckIfCategoryIsEnabled()
         {
             var result = _categoryService.GetAll();
-            if (result.Data.Count < 10)
+            if (result.Data.Count < 15)
             {
-                return new ErrorResult(Messages.ProductNameAlreadyExists);
+                return new SuccessResult();
             }
-
-            return new SuccessResult();
+            return new ErrorResult(Messages.ProductCountOfCategoryError);            
         }
 
         public IResult Delete(Product product)
@@ -110,7 +109,7 @@ namespace Business.Concrete
 
         public IDataResult<List<ProductDetailDto>> GetProductDetails()
         {
-            if (DateTime.Now.Hour == 00)
+            if (DateTime.Now.Hour == 02)
             {
                 return new ErrorDataResult<List<ProductDetailDto>>(Messages.MaintenanceTime);
             }

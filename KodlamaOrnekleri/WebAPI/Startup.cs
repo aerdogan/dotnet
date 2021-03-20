@@ -79,6 +79,9 @@ namespace WebAPI
                 });
             }
 
+            /* bütün sistemi try catch içerisine alýr */
+            app.ConfigureCustomExceptionMiddleware(); 
+
             app.UseCors(builder=>builder.WithOrigins("http://localhost:4200").AllowAnyHeader());
 
             app.UseHttpsRedirection();
