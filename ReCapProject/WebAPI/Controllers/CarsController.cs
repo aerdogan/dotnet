@@ -1,6 +1,5 @@
 ﻿using Business.Abstract;
 using Entities.Concrete;
-using Entities.DTOs;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
@@ -140,6 +139,17 @@ namespace WebAPI.Controllers
         public IActionResult GetCarDetailsByColorId(int colorId)
         {
             var result = _carService.GetCarDetailsByColorId(colorId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpGet("getcardetailsbybrandidandcolorid")]
+        public IActionResult GetCarDetailsByBrandIdAndColorId(int brandId, int colorId)
+        {
+            var result = _carService.GetCarDetailsByBrandIdAndColorId(brandId,colorId);
             if (result.Success)
             {
                 return Ok(result);
