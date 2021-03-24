@@ -39,6 +39,31 @@ namespace DataAccess.Concrete.EntityFramework
             }
         }
 
+        public CarDetailDto GetCarDetailsById(Expression<Func<CarDetailDto, bool>> filter = null)
+        {
+            using (ReCapContext context = new ReCapContext())
+            {
+                var result = from c in context.Cars
+                             join co in context.Colors
+                             on c.ColorId equals co.Id
+                             join b in context.Brands
+                             on c.BrandId equals b.Id
+                             select new CarDetailDto
+                             {
+                                 Id = c.Id,
+                                 Name = c.Name,
+                                 ColorId = c.ColorId,
+                                 ColorName = co.Name,
+                                 BrandId = c.BrandId,
+                                 BrandName = b.Name,
+                                 ModelYear = c.ModelYear,
+                                 DailyPrice = c.DailyPrice,
+                                 Description = c.Description
+                             };
+                return filter == null ? result.FirstOrDefault() : result.Where(filter).FirstOrDefault();
+            }
+        }
+
         public List<CarDetailDto> GetCarDetails(Expression<Func<CarDetailDto, bool>> filter = null)
         {
             using (ReCapContext context = new ReCapContext())

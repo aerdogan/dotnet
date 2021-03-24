@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using Core.Utilities.Results;
+using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
 {
@@ -8,14 +8,15 @@ namespace WebAPI.Controllers
     public class PaymentController : ControllerBase
     {
         [HttpPost("payment")]
-        public ActionResult Payment()
+        public ActionResult Payment(bool paymentStatus)
         {
-            Random rng = new Random();
-            bool result = rng.Next(0, 2) > 0;
-            if (result)
+            Result result;
+            if (paymentStatus)
             {
+                result = new Result(true, "Payment Successful");
                 return Ok(result);
-            }
+            }             
+            result = new Result(false, "Payment failed");
             return BadRequest(result);
         }
     }

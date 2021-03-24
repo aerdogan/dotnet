@@ -50,7 +50,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Product>>(_productDal.GetAll(p => p.CategoryId == categoryId).ToList());
         }
 
-
+        [SecuredOperation("product.List,admin")]
         [ValidationAspect(typeof(ProductValidator), Priority = 1)]
         [CacheRemoveAspect("IProductService.Get")]
         public IResult Add(Product product)
