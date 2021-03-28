@@ -54,10 +54,9 @@
         public static string UserAlreadyExists = "Bu kullanıcı zaten mevcut";
         public static string AccessTokenCreated = "Access token başarıyla oluşturuldu";
 
-        public static string BankCardAdded { get; internal set; }
-        public static string BankCardUpdated { get; internal set; }
-        public static string BankCardDeleted { get; internal set; }
-        public static string PaymentSuccessful { get; internal set; }
-        public static string PaymentFailed { get; internal set; }
+        public static string PaymentSuccessful ="Ödeme tamamlandı";
+        public static string PaymentFailed = "Ödeme hatalı";
+
+        public static string CardAdded = "Kart Eklendi";
     }
 }

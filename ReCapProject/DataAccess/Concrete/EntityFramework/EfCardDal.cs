@@ -4,8 +4,9 @@ using Entities.Concrete;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class EfBankCardDal : EfEntityRepositoryBase<BankCard, ReCapContext>, IBankCardDal
+    public class EfCardDal : EfEntityRepositoryBase<Card, ReCapContext>, ICardDal
     {
-        
+
+
     }
 }
