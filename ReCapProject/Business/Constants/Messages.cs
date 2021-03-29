@@ -2,7 +2,7 @@
 {
     public static class Messages
     {
-        public static string CarAdded = "Araç eklendi!";
+        public static string CarAdded = "Araç kayıt edildi!";
         public static string CarUpdated = "Araç güncellendi!";
         public static string CarDeleted = "Araç silindi!";
         public static string CarsListed = "Araçlar Listelendi!";

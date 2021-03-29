@@ -28,7 +28,7 @@ namespace Business.Concrete
         }
 
         //[CacheRemoveAspect("car")]
-        [SecuredOperation("car.add")]
+        //[SecuredOperation("car.add")]
         [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car car)
         {
@@ -53,7 +53,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.CarAdded);
         }
 
-        [SecuredOperation("car.update")]
+        //[SecuredOperation("car.update")]
         [ValidationAspect(typeof(CarValidator))]
         public IResult Update(Car car)
         {
