@@ -3,6 +3,7 @@ using Business.Constants;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using System;
 
 namespace Business.Concrete
 {
@@ -16,6 +17,7 @@ namespace Business.Concrete
 
         public IResult Add(Payment payment)
         {
+            payment.PaymentDate = DateTime.Now;
             _paymentDal.Add(payment);
             return new SuccessResult(Messages.PaymentSuccessful);
         }
