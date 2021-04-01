@@ -17,7 +17,7 @@ namespace Business.Concrete
         public IResult Add(Payment payment)
         {
             _paymentDal.Add(payment);
-            return new SuccessResult(Messages.CustomerAdded);
+            return new SuccessResult(Messages.PaymentSuccessful);
         }
     }
 }

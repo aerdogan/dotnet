@@ -7,7 +7,7 @@ namespace WebAPI.Controllers
     [Route("api/[controller]")]
     [ApiController]
     public class PaymentsController : ControllerBase
-    {        
+    {
         ICardService _cardService;
         IPaymentService _paymentService;
 
@@ -18,7 +18,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("payment")]
-        public ActionResult Payment(Payment payment)
+        public IActionResult Payment(Payment payment)
         {
             var result = _paymentService.Add(payment);
             if (result.Success)
@@ -29,7 +29,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("savecard")]
-        public ActionResult SaveCard(Card card)
+        public IActionResult SaveCard(Card card)
         {
             var result = _cardService.Add(card);
             if (result.Success)
@@ -40,7 +40,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("listcards")]
-        public ActionResult GetCardsByCustomerId(int customerId)
+        public IActionResult GetCardsByCustomerId(int customerId)
         {
             var result = _cardService.GetByCustomerId(customerId);
             if (result.Success)
@@ -49,6 +49,7 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
+
 
     }
 }
