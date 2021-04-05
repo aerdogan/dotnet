@@ -44,10 +44,8 @@ namespace DataAccess.Concrete.EntityFramework
             using (ReCapContext context = new ReCapContext())
             {
                 var result = from c in context.Cars
-                             join co in context.Colors
-                             on c.ColorId equals co.Id
-                             join b in context.Brands
-                             on c.BrandId equals b.Id
+                             join co in context.Colors on c.ColorId equals co.Id
+                             join b in context.Brands on c.BrandId equals b.Id
                              select new CarDetailDto
                              {
                                  Id = c.Id,
@@ -69,10 +67,8 @@ namespace DataAccess.Concrete.EntityFramework
             using (ReCapContext context = new ReCapContext())
             {
                 var result = from c in context.Cars
-                             join co in context.Colors
-                             on c.ColorId equals co.Id
-                             join b in context.Brands
-                             on c.BrandId equals b.Id
+                             join co in context.Colors on c.ColorId equals co.Id
+                             join b in context.Brands on c.BrandId equals b.Id
                              select new CarDetailDto
                              {
                                  Id = c.Id,
