@@ -24,7 +24,7 @@ namespace Business.ValidationRules.FluentValidation
             RuleFor(u => u.Email).NotEmpty().WithMessage("Email boş geçilemez.");
             RuleFor(u => u.Email).EmailAddress().WithMessage("Email adres formatı hatalı.");
             RuleFor(u => u.Password).NotEmpty().WithMessage("Şifre boş geçilemez.");
-            RuleFor(u => u.Password.Length).GreaterThan(8).WithMessage("Şifre uzunluğu en az 8 karakter olmalı");
+            RuleFor(u => u.Password.Length).GreaterThanOrEqualTo(8).WithMessage("Şifre uzunluğu en az 8 karakter olmalı");
         }
     }
     

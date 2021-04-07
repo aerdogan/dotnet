@@ -81,7 +81,7 @@ namespace Business.Concrete
                 result.ReturnDate = DateTime.Now;
                 _rentalDal.Update(result);
             }
-            return new SuccessResult(Messages.RentalUpdated);;
+            return new SuccessResult(Messages.RentalUpdated);
         }
     }
 }

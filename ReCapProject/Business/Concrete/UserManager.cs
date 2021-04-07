@@ -18,7 +18,6 @@ namespace Business.Concrete
             _userDal = userDal;
         }
 
-        [SecuredOperation("user.add")]
         [ValidationAspect(typeof(UserValidator))]
         public IResult Add(User user)
         {
@@ -51,9 +50,9 @@ namespace Business.Concrete
             return new SuccessDataResult<User>(_userDal.Get(u => u.Id == id));
         }
 
-        public User GetByMail(string email)
+        public IDataResult<User> GetByMail(string email)
         {
-            return _userDal.Get(u => u.Email == email);
+            return new SuccessDataResult<User>(_userDal.Get(u => u.Email == email));
         }
 
         public List<OperationClaim> GetClaims(User user)
