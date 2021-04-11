@@ -15,5 +15,6 @@ namespace Business.Abstract
         IDataResult<List<RentalDetailDto>> GetAllRentalDetails();
 
         bool IsCarAvailable(int carId);
+        IResult CarIsReturned(int carId);
     }
 }
