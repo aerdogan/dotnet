@@ -1,5 +1,5 @@
 -- MSSQL için aktif veritabanının C# Entity Class'larınızı oluşturur
- 
+
 declare @tableName varchar(200)
 declare @columnName varchar(200)
 declare @datatype varchar(50)
@@ -18,7 +18,8 @@ INTO @tableName
 WHILE @@FETCH_STATUS = 0
 BEGIN
 
-PRINT 'public class ' + LEFT(@tableName, LEN(@tableName) - 1) + ' {'
+PRINT 'public class ' + LEFT(@tableName, LEN(@tableName) - 1) + ' : IEntity
+{'
 
     DECLARE column_cursor CURSOR FOR 
     SELECT COLUMN_NAME, DATA_TYPE
