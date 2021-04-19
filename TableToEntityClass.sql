@@ -35,17 +35,17 @@ PRINT 'public class ' + LEFT(@tableName, LEN(@tableName) - 1) + ' : IEntity
 
 	-- datatype
 	select @sType = case @datatype
-	when 'int' then 'Int32'
-	when 'decimal' then 'Decimal'
-	when 'money' then 'Decimal'
-	when 'char' then 'String'
-	when 'nchar' then 'String'
-	when 'varchar' then 'String'
-	when 'nvarchar' then 'String'
+	when 'int' then 'int'
+	when 'decimal' then 'decimal'
+	when 'money' then 'decimal'
+	when 'char' then 'string'
+	when 'nchar' then 'string'
+	when 'varchar' then 'string'
+	when 'nvarchar' then 'string'
 	when 'uniqueidentifier' then 'Guid'
 	when 'datetime' then 'DateTime'
-	when 'bit' then 'Boolean'
-	else 'String'
+	when 'bit' then 'bool'
+	else 'string'
 	END
 		SELECT @sProperty = '	public ' + @sType + ' ' + @columnName + ' { get; set;}'
 		PRINT @sProperty
