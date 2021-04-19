@@ -1,5 +1,8 @@
-declare @TableName sysname = 'TableName' -- Tablo ismini değiştirerek Class'larınızı oluşturabilirsiniz
-declare @Result varchar(max) = 'public class ' + @TableName + '
+ -- TableName kısmından tablo ismini değiştirerek Class'larınızı oluşturabilirsiniz
+ -- Tablolar(Varlıklar) çoğul olacağı için son karakterini temizleyecektir Örn : (Products tablosu için Product class'ı oluşacaktır) 
+ 
+declare @TableName sysname = 'TableName'
+declare @Result varchar(max) = 'public class ' +LEFT(@TableName, LEN(@TableName) - 1)  + ':IEntity
 {'
 
 select @Result = @Result + '
